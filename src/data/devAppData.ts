@@ -11,11 +11,11 @@ export const appData: AppData = {
         email: "info@insiturigging.com",
         hours: "Monday-Saturday / 8am-5pm",
         images: {
-            home: "https://images.pexels.com/photos/19045780/pexels-photo-19045780.jpeg?auto=compress&cs=tinysrgb&w=1800",
-            services: "https://images.pexels.com/photos/5418592/pexels-photo-5418592.jpeg?auto=compress&cs=tinysrgb&w=1800",
-            about: "https://images.pexels.com/photos/32709014/pexels-photo-32709014.jpeg?auto=compress&cs=tinysrgb&w=1800",
-            team: "https://images.pexels.com/photos/1340428/pexels-photo-1340428.jpeg?auto=compress&cs=tinysrgb&w=1200",
-            contact: "https://images.pexels.com/photos/11955837/pexels-photo-11955837.jpeg?auto=compress&cs=tinysrgb&w=1800",
+            home: "/images/home-hero.jpg",
+            services: "/images/services-background.jpg",
+            about: "/images/about-background.jpeg",
+            team: "/images/team-image.png",
+            contact: "/images/contact-background.jpg",
         },
     },
     navigation: {
