@@ -38,15 +38,23 @@ export default function ServiceAccordion({ sections, openService, onToggleServic
                 return (
                     <section key={section.key} className={itemClass}>
                         <button
+                            id={`service-trigger-${section.key}`}
                             className="accordion-trigger"
                             type="button"
                             aria-expanded={isOpen}
+                            aria-controls={`service-panel-${section.key}`}
                             onClick={() => onToggleService(section.key)}
                         >
                             <span className="accordion__label">{section.title}</span>
                             <Chevron className="accordion__icon" />
                         </button>
-                        <div className="accordion-panel" style={panelStyle}>
+                        <div
+                            id={`service-panel-${section.key}`}
+                            className="accordion-panel"
+                            style={panelStyle}
+                            role="region"
+                            aria-labelledby={`service-trigger-${section.key}`}
+                        >
                             <div className="accordion-panel__inner">
                                 <p>{section.intro}</p>
                                 <ul>

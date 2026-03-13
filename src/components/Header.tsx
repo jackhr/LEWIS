@@ -24,7 +24,7 @@ export default function Header({ site, navigation, menuOpen, onToggleMenu, onNav
                     type="button"
                     aria-expanded={menuOpen}
                     aria-controls="site-navigation"
-                    aria-label="Toggle navigation"
+                    aria-label={menuOpen ? "Close navigation" : "Open navigation"}
                     onClick={onToggleMenu}
                 >
                     <span></span>
