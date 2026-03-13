@@ -661,19 +661,27 @@ ul {
     .nav-toggle {
         display: block;
         position: relative;
-        z-index: 3;
+        z-index: 4;
+    }
+
+    .brand {
+        position: relative;
+        z-index: 4;
     }
 
     .site-nav {
-        --mobile-header-offset: 6rem;
         position: fixed;
-        inset: var(--mobile-header-offset) 0 auto;
-        background: rgba(255, 255, 255, 0.97);
-        border-bottom: 1px solid rgba(5, 5, 5, 0.2);
-        display: grid;
-        gap: 1rem;
-        padding: 1.5rem 1.5rem 2rem;
-        transform: translateY(calc(-100% - var(--mobile-header-offset)));
+        inset: 0;
+        z-index: 3;
+        background: rgba(0, 0, 0, 0.98);
+        color: var(--white);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        gap: 0.4rem;
+        padding: max(6.2rem, calc(env(safe-area-inset-top) + 5.2rem)) 2rem 3rem;
+        transform: translateY(-100%);
         opacity: 0;
         visibility: hidden;
         pointer-events: none;
@@ -686,6 +694,40 @@ ul {
         visibility: visible;
         pointer-events: auto;
         transition: transform var(--transition), opacity var(--transition);
+    }
+
+    .site-nav a {
+        color: var(--white);
+        font-size: clamp(3.15rem, 12vw, 5.3rem);
+        line-height: 0.96;
+        letter-spacing: -0.02em;
+        font-weight: 500;
+        padding: 0;
+        opacity: 1;
+    }
+
+    .site-nav a::after {
+        display: none;
+    }
+
+    .site-nav a[aria-current="page"],
+    .site-nav a:hover,
+    .site-nav a:focus-visible {
+        opacity: 0.76;
+    }
+
+    body.menu-open .site-header {
+        background: transparent;
+        border-bottom-color: transparent;
+        backdrop-filter: none;
+    }
+
+    body.menu-open .brand {
+        color: var(--white);
+    }
+
+    body.menu-open .nav-toggle span {
+        background: var(--white);
     }
 
     .home-page__content {
@@ -730,7 +772,7 @@ ul {
     }
 
     .site-nav {
-        --mobile-header-offset: 5rem;
+        padding: max(5.4rem, calc(env(safe-area-inset-top) + 4.4rem)) 1.5rem 2.5rem;
     }
 
     .home-page__hero,
