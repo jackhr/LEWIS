@@ -79,7 +79,7 @@ export default function App() {
                     <Route path="*" element={<Navigate to="/" replace />} />
                 </Routes>
             </main>
-            <Footer site={site} />
+            <Footer site={site} navigation={navigation} />
         </div>
     );
 }
