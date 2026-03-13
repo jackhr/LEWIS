@@ -5,7 +5,7 @@ export const appData: AppData = {
     site: {
         brand: "INSITU",
         tagline: "Expert yacht rigging based in Antigua.",
-        siteUrl: "https://insiturigging.com",
+        siteUrl: "https://lewis.jackrainey.com",
         locale: "en_US",
         defaultKeywords: [
             "yacht rigging antigua",

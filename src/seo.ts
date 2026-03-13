@@ -1,7 +1,8 @@
 import type { AppData, PageKey } from "./types/app";
 
 const STRUCTURED_DATA_ID = "structured-data";
-const SITE_DOMAIN_FALLBACK = "https://insiturigging.com";
+const SITE_DOMAIN_FALLBACK = "https://lewis.jackrainey.com";
+const ROBOTS_POLICY = "noindex, nofollow, noarchive, nosnippet, noimageindex";
 
 function normalizedSiteUrl(siteUrl: string): string {
     const trimmed = siteUrl.trim();
@@ -242,7 +243,8 @@ export function updateSeo(data: AppData, pageKey: PageKey): void {
     setAlternate("x-default", pageUrl);
     setMetaByName("description", page.description);
     setMetaByName("keywords", keywords);
-    setMetaByName("robots", "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1");
+    setMetaByName("robots", ROBOTS_POLICY);
+    setMetaByName("googlebot", ROBOTS_POLICY);
     setMetaByName("author", data.site.brand);
     setMetaByName("theme-color", "#000000");
     setMetaByProperty("og:title", page.title);
