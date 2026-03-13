@@ -689,7 +689,7 @@ ul {
         opacity: 0;
         visibility: hidden;
         pointer-events: none;
-        transition: transform var(--transition), opacity var(--transition), visibility 0s linear var(--transition);
+        transition: transform 220ms ease, opacity 220ms ease, visibility 0s linear 220ms;
     }
 
     .site-nav.is-open {
@@ -697,7 +697,7 @@ ul {
         opacity: 1;
         visibility: visible;
         pointer-events: auto;
-        transition: transform var(--transition), opacity var(--transition);
+        transition: transform 220ms ease, opacity 220ms ease, visibility 0s linear 0s;
     }
 
     .site-nav a {
