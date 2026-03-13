@@ -23,7 +23,12 @@ export default function AboutPage({ site, content }: AboutPageProps) {
             <section className="team-section">
                 <div className="team-grid">
                     <div className="team-image" data-reveal>
-                        <img src={site.images.team} alt="Lewis Fitzgerald working aloft on a yacht rig" />
+                        <img
+                            src={site.images.team}
+                            alt="Lewis Fitzgerald working aloft on a yacht rig"
+                            loading="lazy"
+                            decoding="async"
+                        />
                     </div>
                     <div className="team-copy" data-reveal>
                         <div className="team-copy__eyebrow">{content.about.teamTitle}</div>

@@ -1,13 +1,13 @@
-import type { ContentData, NavigationMap, PageKey, SiteData } from "../types/app";
+import { Link } from "react-router-dom";
+import type { ContentData, NavigationMap, SiteData } from "../types/app";
 
 interface HomePageProps {
     site: SiteData;
     content: ContentData;
     navigation: NavigationMap;
-    onNavigate: (pageKey: PageKey) => void;
 }
 
-export default function HomePage({ site, content, navigation, onNavigate }: HomePageProps) {
+export default function HomePage({ site, content, navigation }: HomePageProps) {
     return (
         <section className="page home-page page-enter">
             <div className="home-page__hero">
@@ -19,17 +19,13 @@ export default function HomePage({ site, content, navigation, onNavigate }: Home
                         <p>{content.home.subheadline}</p>
                         <div className="home-actions">
                             {content.home.quickLinks.map((item) => (
-                                <a
+                                <Link
                                     key={item.key}
                                     className="card-link"
-                                    href={navigation[item.key].href}
-                                    onClick={(event) => {
-                                        event.preventDefault();
-                                        onNavigate(item.key);
-                                    }}
+                                    to={navigation[item.key].href}
                                 >
                                     {item.label}
-                                </a>
+                                </Link>
                             ))}
                         </div>
                     </div>

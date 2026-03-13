@@ -1,4 +1,5 @@
-import { startTransition, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import { appData } from "./data/devAppData";
@@ -7,7 +8,8 @@ import AboutPage from "./pages/AboutPage";
 import ContactPage from "./pages/ContactPage";
 import HomePage from "./pages/HomePage";
 import ServicesPage from "./pages/ServicesPage";
-import type { NavigationMap, PageKey, PagesMap } from "./types/app";
+import { updateSeo } from "./seo";
+import type { NavigationMap, PageKey } from "./types/app";
 
 function normalizePath(pathname: string): string {
     const normalized = pathname.replace(/\/+$/, "");
@@ -23,43 +25,18 @@ function pageFromPath(pathname: string, navigation: NavigationMap): PageKey {
     return entry ? entry[0] : "home";
 }
 
-function updateMeta(pages: PagesMap, pageKey: PageKey): void {
-    const page = pages[pageKey] || pages.home;
-    document.title = page.title;
-    document.body.className = `page-${pageKey}`;
-
-    const description = document.querySelector('meta[name="description"]');
-    if (description) {
-        description.setAttribute("content", page.description);
-    }
-
-    const ogTitle = document.querySelector('meta[property="og:title"]');
-    if (ogTitle) {
-        ogTitle.setAttribute("content", page.title);
-    }
-
-    const ogDescription = document.querySelector('meta[property="og:description"]');
-    if (ogDescription) {
-        ogDescription.setAttribute("content", page.description);
-    }
-}
-
 export default function App() {
     const data = appData;
-    const { site, navigation, pages, content } = data;
-    const firstServiceKey = content.services.sections[0]?.key ?? "";
-    const initialPage: PageKey = navigation[data.initialPage]
-        ? data.initialPage
-        : pageFromPath(window.location.pathname, navigation);
-    const [pageKey, setPageKey] = useState<PageKey>(initialPage);
+    const { site, navigation, content } = data;
+    const location = useLocation();
+    const pageKey = pageFromPath(location.pathname, navigation);
     const [menuOpen, setMenuOpen] = useState(false);
-    const [openService, setOpenService] = useState<string>(firstServiceKey);
 
     useReveal(pageKey);
 
     useEffect(() => {
-        updateMeta(pages, pageKey);
-    }, [pages, pageKey]);
+        updateSeo(data, pageKey);
+    }, [data, pageKey]);
 
     useEffect(() => {
         document.body.classList.toggle("menu-open", menuOpen);
@@ -70,76 +47,18 @@ export default function App() {
     }, [menuOpen]);
 
     useEffect(() => {
-        const onPopState = () => {
-            const nextPage = pageFromPath(window.location.pathname, navigation);
-            setPageKey(nextPage);
-            setMenuOpen(false);
-            document.body.classList.remove("menu-open");
-            updateMeta(pages, nextPage);
-        };
-
-        window.addEventListener("popstate", onPopState);
-
-        return () => {
-            window.removeEventListener("popstate", onPopState);
-        };
-    }, [navigation, pages]);
-
-    useEffect(() => {
-        if (pageKey !== "services" && firstServiceKey !== "") {
-            setOpenService(firstServiceKey);
-        }
-    }, [firstServiceKey, pageKey]);
-
-    function navigate(nextPageKey: PageKey): void {
-        if (!navigation[nextPageKey]) {
-            return;
-        }
-
         setMenuOpen(false);
         document.body.classList.remove("menu-open");
-
-        startTransition(() => {
-            setPageKey(nextPageKey);
-        });
-
-        const href = navigation[nextPageKey].href;
-        if (normalizePath(window.location.pathname) !== href) {
-            window.history.pushState({ pageKey: nextPageKey }, "", href);
-        }
-
-        updateMeta(pages, nextPageKey);
         window.scrollTo({ top: 0, behavior: "smooth" });
-    }
+    }, [location.pathname]);
 
     function toggleMenu(): void {
         setMenuOpen((current) => !current);
     }
 
-    let page = (
-        <HomePage
-            site={site}
-            content={content}
-            navigation={navigation}
-            onNavigate={navigate}
-        />
-    );
-
-    if (pageKey === "services") {
-        page = (
-            <ServicesPage
-                site={site}
-                content={content}
-                openService={openService}
-                onToggleService={(sectionKey) => {
-                    setOpenService((current) => (current === sectionKey ? "" : sectionKey));
-                }}
-            />
-        );
-    } else if (pageKey === "about") {
-        page = <AboutPage site={site} content={content} />;
-    } else if (pageKey === "contact") {
-        page = <ContactPage site={site} content={content} />;
+    function closeMenu(): void {
+        setMenuOpen(false);
+        document.body.classList.remove("menu-open");
     }
 
     return (
@@ -147,12 +66,19 @@ export default function App() {
             <Header
                 site={site}
                 navigation={navigation}
-                pageKey={pageKey}
                 menuOpen={menuOpen}
                 onToggleMenu={toggleMenu}
-                onNavigate={navigate}
+                onNavigate={closeMenu}
             />
-            <div className="app__view">{page}</div>
+            <main id="main-content" className="app__view">
+                <Routes>
+                    <Route path="/" element={<HomePage site={site} content={content} navigation={navigation} />} />
+                    <Route path="/services" element={<ServicesPage site={site} content={content} />} />
+                    <Route path="/about" element={<AboutPage site={site} content={content} />} />
+                    <Route path="/contact" element={<ContactPage site={site} content={content} />} />
+                    <Route path="*" element={<Navigate to="/" replace />} />
+                </Routes>
+            </main>
             <Footer site={site} />
         </div>
     );

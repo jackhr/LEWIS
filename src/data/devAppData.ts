@@ -5,6 +5,16 @@ export const appData: AppData = {
     site: {
         brand: "INSITU",
         tagline: "Expert yacht rigging based in Antigua.",
+        siteUrl: "https://insiturigging.com",
+        locale: "en_US",
+        defaultKeywords: [
+            "yacht rigging antigua",
+            "standing rigging antigua",
+            "running rigging antigua",
+            "deck hardware antigua",
+            "superyacht rigging caribbean",
+            "falmouth harbour rigging",
+        ],
         location: "Falmouth Harbour, Antigua and Barbuda",
         phone_display: "+1 268 714 4222",
         phone_href: "+12687144222",
@@ -28,18 +38,50 @@ export const appData: AppData = {
         home: {
             title: "INSITU",
             description: "Expert yacht rigging based in Antigua. Specialists in standing and running rigging.",
+            canonicalPath: "/",
+            ogImage: "/images/home-hero.jpg",
+            ogImageAlt: "Yacht mast and rigging photographed from deck level.",
+            keywords: [
+                "expert yacht rigging antigua",
+                "yacht rigging specialists",
+                "insitu antigua",
+            ],
         },
         services: {
             title: "Services - INSITU",
             description: "Standing rigging, running rigging, and deck hardware services from INSITU in Antigua.",
+            canonicalPath: "/services",
+            ogImage: "/images/services-background.jpg",
+            ogImageAlt: "Deck hardware and rope rigging components prepared for service.",
+            keywords: [
+                "standing rigging services",
+                "running rigging services",
+                "deck hardware services",
+            ],
         },
         about: {
             title: "About - INSITU",
             description: "Learn more about INSITU, a yacht rigging company based in Falmouth Harbour, Antigua and Barbuda.",
+            canonicalPath: "/about",
+            ogImage: "/images/about-background.jpeg",
+            ogImageAlt: "View from aboard a yacht in Falmouth Harbour, Antigua.",
+            keywords: [
+                "about insitu rigging",
+                "rigging team antigua",
+                "lewis fitzgerald rigging",
+            ],
         },
         contact: {
             title: "Contact - INSITU",
             description: "Get in touch with INSITU for yacht rigging support in Antigua.",
+            canonicalPath: "/contact",
+            ogImage: "/images/contact-background.jpg",
+            ogImageAlt: "Rigging workshop setup with ropes and winches.",
+            keywords: [
+                "contact yacht rigger antigua",
+                "insitu rigging phone email",
+                "falmouth harbour rigging contact",
+            ],
         },
     },
     content: {

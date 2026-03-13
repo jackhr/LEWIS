@@ -11,6 +11,9 @@ export interface SiteImages {
 export interface SiteData {
     brand: string;
     tagline: string;
+    siteUrl: string;
+    locale: string;
+    defaultKeywords: string[];
     location: string;
     phone_display: string;
     phone_href: string;
@@ -29,6 +32,10 @@ export type NavigationMap = Record<PageKey, NavigationItem>;
 export interface PageMeta {
     title: string;
     description: string;
+    canonicalPath: string;
+    ogImage: string;
+    ogImageAlt: string;
+    keywords: string[];
 }
 
 export type PagesMap = Record<PageKey, PageMeta>;
