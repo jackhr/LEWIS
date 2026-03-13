@@ -14,7 +14,13 @@ export default function ServicesPage({ site, content }: ServicesPageProps) {
     return (
         <section className="page services-page page-enter">
             <div className="services-page__hero">
-                <div className="page-image" style={{ backgroundImage: `url('${site.images.services}')` }}></div>
+                <div className="page-image" aria-hidden="true">
+                    <picture>
+                        <source media="(max-width: 768px)" type="image/webp" srcSet="/images/services-background-768.webp" />
+                        <source type="image/webp" srcSet="/images/services-background-1600.webp" />
+                        <img src={site.images.services} alt="" loading="eager" decoding="async" />
+                    </picture>
+                </div>
                 <div className="page-veil"></div>
                 <div className="services-page__content">
                     <div data-reveal>

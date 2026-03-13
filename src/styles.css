@@ -236,33 +236,42 @@ ul {
 .page-image {
     position: absolute;
     inset: 0;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
     transform: scale(1.06);
     animation: drift 22s ease-in-out infinite alternate;
 }
 
+.page-image picture {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.page-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
 .home-page__hero .page-image {
-    background-position: 76% 44%;
     filter: grayscale(1) contrast(1.15) brightness(1.15);
     opacity: 0.58;
 }
 
+.home-page__hero .page-image img {
+    object-position: 76% 44%;
+}
+
 .services-page__hero .page-image {
-    background-position: center;
     filter: grayscale(0.96) brightness(1.05);
     opacity: 0.38;
 }
 
 .about-hero .page-image {
-    background-position: center;
     filter: brightness(0.46);
     opacity: 1;
 }
 
 .contact-page__hero .page-image {
-    background-position: center;
     filter: brightness(0.42);
     opacity: 1;
 }

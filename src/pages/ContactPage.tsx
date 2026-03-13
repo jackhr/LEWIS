@@ -9,7 +9,13 @@ export default function ContactPage({ site, content }: ContactPageProps) {
     return (
         <section className="page contact-page page-enter">
             <div className="contact-page__hero">
-                <div className="page-image" style={{ backgroundImage: `url('${site.images.contact}')` }}></div>
+                <div className="page-image" aria-hidden="true">
+                    <picture>
+                        <source media="(max-width: 768px)" type="image/webp" srcSet="/images/contact-background-900.webp" />
+                        <source type="image/webp" srcSet="/images/contact-background-1400.webp" />
+                        <img src={site.images.contact} alt="" loading="eager" decoding="async" />
+                    </picture>
+                </div>
                 <div className="page-veil"></div>
                 <div className="contact-page__content">
                     <div className="contact-card" data-reveal>

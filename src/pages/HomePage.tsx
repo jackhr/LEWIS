@@ -11,7 +11,13 @@ export default function HomePage({ site, content, navigation }: HomePageProps) {
     return (
         <section className="page home-page page-enter">
             <div className="home-page__hero">
-                <div className="page-image" style={{ backgroundImage: `url('${site.images.home}')` }}></div>
+                <div className="page-image" aria-hidden="true">
+                    <picture>
+                        <source media="(max-width: 768px)" type="image/webp" srcSet="/images/home-hero-768.webp" />
+                        <source type="image/webp" srcSet="/images/home-hero-1600.webp" />
+                        <img src={site.images.home} alt="" fetchPriority="high" decoding="async" />
+                    </picture>
+                </div>
                 <div className="page-veil"></div>
                 <div className="home-page__content">
                     <div className="home-copy" data-reveal>
